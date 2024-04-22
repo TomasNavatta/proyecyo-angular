@@ -1,0 +1,6 @@
+<p>students-page works!</p>
+<ul>
+    <li *ngFor="let student of example" [ngStyle]="{'color': student.aprobado ? 'green' : 'red'}">
+      {{student.nombre}} - {{student.aprobado ? 'APROBADO' : 'DESAPROBADO' }} - {{student.nacimiento | date : "dd/MM/YYYY"}}
+    </li>
+  </ul>
