@@ -1,44 +1,44 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ProductsService } from './products.service';
+import { CursosService } from './cursos.service';
 import { IClases } from './models';
-import { API_URL, RANDOM_NUMBER, PRODUCTS } from './products.module';
+import { API_URL, RANDOM_NUMBER, PRODUCTS } from './cursos.module';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { Store } from '@ngrx/store';
-import { ProductActions } from './store/product.actions';
-import { selectIsLoading, selectProducts, selectProductsError } from './store/product.selectors';
+import { CursoActions } from './store/curso.actions';
+import { selectIsLoading, selectCursos, selectCursosError } from './store/curso.selectors';
 import { Observable, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ClaseDialogComponent } from './components/clase-dialog/clase-dialog.component';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+  selector: 'app-cursos',
+  templateUrl: './cursos.component.html',
+  styleUrl: './cursos.component.scss'
 })
-export class ProductsComponent implements OnInit {
+export class CursosComponent implements OnInit {
   displayedColumns = ['id', 'clase', 'horario', 'actions'];
   clases$: Observable<IClases[]>
   isLoading$: Observable<boolean>
   error$: Observable<Error>
   clases: IClases[] = []
 
-  constructor(private productsService: ProductsService,private store: Store, private matDialog: MatDialog) {
+  constructor(private cursosService: CursosService,private store: Store, private matDialog: MatDialog) {
     
     this.isLoading$ = this.store.select(selectIsLoading)
-    this.clases$ = this.store.select(selectProducts)
-    this.error$ = this.store.select(selectProductsError).pipe(map((err) => err as Error))
+    this.clases$ = this.store.select(selectCursos)
+    this.error$ = this.store.select(selectCursosError).pipe(map((err) => err as Error))
   
   }
   ngOnInit(): void {
-    this.store.dispatch(ProductActions.loadProducts());
+    this.store.dispatch(CursoActions.loadCursos());
   }
 
-  deleteProductById(id: number): void {
-    this.store.dispatch(ProductActions.deleteProductById({id}))
+  deleteCursoById(id: number): void {
+    this.store.dispatch(CursoActions.deleteCursoById({id}))
   }
 
-  createProduct(): void {
-    this.store.dispatch(ProductActions.createProduct({ payload: {
+  createCurso(): void {
+    this.store.dispatch(CursoActions.createCurso({ payload: {
       clase: 'Random product',
       horario: '10:00'
     }}))
@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit {
 
             result.createdAt = new Date()
 
-            this.productsService.createProduct(result).subscribe({
+            this.cursosService.createProduct(result).subscribe({
               next: (usuarioCreado) => {
                 this.clases = [...this.clases, usuarioCreado]
               }

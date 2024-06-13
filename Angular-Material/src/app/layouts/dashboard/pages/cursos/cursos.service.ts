@@ -5,7 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class ProductsService {
+export class CursosService {
 
   constructor(private httpClient: HttpClient) { }
 

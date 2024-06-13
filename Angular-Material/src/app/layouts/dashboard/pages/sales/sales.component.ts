@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SalesService } from './sales.service';
 import { ISale, ISaleForm } from './models';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ProductsService } from '../products/products.service';
-import { IClases } from '../products/models';
+import { CursosService } from '../cursos/cursos.service';
+import { IClases } from '../cursos/models';
 import { Store } from '@ngrx/store';
 import { selectSaleList, selectLoadingSales, selectSalesError } from './store/sale.selectors';
 import { SaleActions } from './store/sale.actions';
@@ -45,7 +45,7 @@ export class SalesComponent implements OnInit {
   
   constructor(
     private salesService: SalesService,
-    private productsService: ProductsService, 
+    private CursosService: CursosService, 
     private usersService: UsersService,
     private store: Store) {
       this.loadingSales$ = this.store.select(selectLoadingSales)
@@ -89,7 +89,7 @@ export class SalesComponent implements OnInit {
   }
 
   loadproducts() {
-    this.productsService.getProducts().subscribe({
+    this.CursosService.getProducts().subscribe({
       next: (v) => (this.clases = v)
     })
   }

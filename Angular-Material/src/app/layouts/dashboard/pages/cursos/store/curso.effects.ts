@@ -2,25 +2,25 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
-import { ProductActions } from './product.actions';
-import { ProductsService } from '../products.service';
+import { CursoActions } from './curso.actions';
+import { CursosService } from '../cursos.service';
 
 
 @Injectable()
-export class ProductEffects {
+export class CursoEffects {
 
   loadProducts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ProductActions.loadProducts),
+      ofType(CursoActions.loadCursos),
       concatMap(() =>
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        this.productsService.getProducts().pipe(
+        this.cursosService.getProducts().pipe(
           // El servicio responde OK:
-          map((data) => ProductActions.loadProductsSuccess({ data })),
+          map((data) => CursoActions.loadCursosSuccess({ data })),
 
           // El servicio responde FAIL:
           catchError((error) =>
-            of(ProductActions.loadProductsFailure({ error }))
+            of(CursoActions.loadCursosFailure({ error }))
           )
         )
       )
@@ -30,14 +30,14 @@ export class ProductEffects {
   createProduct$ = createEffect(() => {
     return this.actions$.pipe(
       // Filtramos la accion:
-      ofType(ProductActions.createProduct),
+      ofType(CursoActions.createCurso),
       concatMap((action) =>
-        this.productsService.createProduct(action.payload).pipe(
+        this.cursosService.createProduct(action.payload).pipe(
           // El servicio responde OK:
-          map((data) => ProductActions.createProductSuccess({ data })),
+          map((data) => CursoActions.createCursoSuccess({ data })),
           // El servicio responde FAIL:
           catchError((error) =>
-            of(ProductActions.createProductFailure({ error }))
+            of(CursoActions.createCursoFailure({ error }))
           )
         )
       )
@@ -47,14 +47,14 @@ export class ProductEffects {
   deleteProductById$ = createEffect(() => {
     return this.actions$.pipe(
       // Filtramos la accion:
-      ofType(ProductActions.deleteProductById),
+      ofType(CursoActions.deleteCursoById),
       concatMap((action) =>
-        this.productsService.deleteProductById(action.id).pipe(
+        this.cursosService.deleteProductById(action.id).pipe(
           // El servicio responde OK:
-          map((data) => ProductActions.deleteProductByIdSuccess({ data })),
+          map((data) => CursoActions.deleteCursoByIdSuccess({ data })),
           // El servicio responde FAIL:
           catchError((error) =>
-            of(ProductActions.deleteProductByIdFailure({ error }))
+            of(CursoActions.deleteCursoByIdFailure({ error }))
           )
         )
       )
@@ -63,5 +63,5 @@ export class ProductEffects {
 
 
 
-  constructor(private actions$: Actions, private productsService: ProductsService) {}
+  constructor(private actions$: Actions, private cursosService: CursosService) {}
 }

@@ -175,6 +175,12 @@
       "clase": "react js",
       "horario": "10:00",
       "createdAt": "2024-06-13T03:28:26.076Z"
+    },
+    {
+      "id": "ef7e",
+      "clase": "angular",
+      "horario": "14:00",
+      "createdAt": "2024-06-13T04:05:49.539Z"
     }
   ],
   "sales": [

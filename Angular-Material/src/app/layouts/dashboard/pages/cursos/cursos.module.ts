@@ -1,8 +1,8 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProductsRoutingModule } from './products-routing.module';
-import { ProductsComponent } from './products.component';
+import { CursosRoutingModule } from './cursos-routing.module';
+import { CursosComponent } from './cursos.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -10,12 +10,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProductsService } from './products.service';
-import { ProductsMockService } from './products-mock.service';
+import { CursosService } from './cursos.service';
+import { CursosMockService } from './cursos-mock.service';
 import { EffectsModule } from '@ngrx/effects';
-import { ProductEffects } from './store/product.effects';
+import { CursoEffects } from './store/curso.effects';
 import { StoreModule } from '@ngrx/store';
-import { productFeature } from './store/product.reducer';
+import { cursoFeature } from './store/curso.reducer';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ClaseDialogComponent } from './components/clase-dialog/clase-dialog.component';
 
@@ -24,12 +24,12 @@ export const PRODUCTS = new InjectionToken('PRODUCTS')
 export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER')
 @NgModule({
   declarations: [
-    ProductsComponent,
+    CursosComponent,
     ClaseDialogComponent
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule,
+    CursosRoutingModule,
     SharedModule,
     MatTableModule,
     MatDialogModule,
@@ -38,17 +38,17 @@ export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER')
     MatProgressSpinnerModule,
     MatInputModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(productFeature),
-    EffectsModule.forFeature([ProductEffects]),
+    StoreModule.forFeature(cursoFeature),
+    EffectsModule.forFeature([CursoEffects]),
   ],
   exports: [
-    ProductsComponent
+    CursosComponent
   ],
   providers:[
     //ProductsService
     {
-      provide: ProductsService,
-      useClass: ProductsService
+      provide: CursosService,
+      useClass: CursosService
     },
     {
       provide: API_URL,
@@ -62,10 +62,10 @@ export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER')
     },
     {
       provide: PRODUCTS,
-      useFactory: (productsService: ProductsService) => {
-        return  productsService.getProducts()
+      useFactory: (cursosService: CursosService) => {
+        return  cursosService.getProducts()
       },
-      deps:[ProductsService]
+      deps:[CursosService]
     }
   ]
 })

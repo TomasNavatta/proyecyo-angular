@@ -1,6 +1,6 @@
 import { IClases } from "./models"
 
-export class  ProductsMockService {
+export class  CursosMockService {
     getProducts(): IClases[] {
         return [{
             id: 2,

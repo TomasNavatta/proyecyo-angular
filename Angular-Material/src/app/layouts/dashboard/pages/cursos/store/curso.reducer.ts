@@ -1,17 +1,17 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { ProductActions } from './product.actions';
+import { CursoActions } from './curso.actions';
 import { IClases } from '../models';
 
-export const productFeatureKey = 'product';
+export const cursoFeatureKey = 'curso';
 
 export interface State {
-  products: IClases[];
+  cursos: IClases[];
   isLoading: boolean;
   error: unknown;
 }
 
 export const initialState: State = {
-  products: [],
+  cursos: [],
   isLoading: false,
   error: null,
 };
@@ -20,7 +20,7 @@ export const reducer = createReducer(
   initialState,
 
   // Accion cargar productos...
-  on(ProductActions.loadProducts, (state) => {
+  on(CursoActions.loadCursos, (state) => {
     return {
       ...state,
       isLoading: true,
@@ -28,16 +28,16 @@ export const reducer = createReducer(
   }),
 
   // Los productos se cargaron sin errores...
-  on(ProductActions.loadProductsSuccess, (state, action) => {
+  on(CursoActions.loadCursosSuccess, (state, action) => {
     return {
       ...state,
       isLoading: false,
-      products: action.data,
+      cursos: action.data,
     };
   }),
 
   // Los productos se cargaron con algun error
-  on(ProductActions.loadProductsFailure, (state, action) => {
+  on(CursoActions.loadCursosFailure, (state, action) => {
     return {
       ...state,
       error: action.error,
@@ -45,21 +45,21 @@ export const reducer = createReducer(
     };
   }),
 
-  on(ProductActions.createProduct, (state) => {
+  on(CursoActions.createCurso, (state) => {
     return {
       ...state,
       isLoading: true,
     };
   }),
 
-  on(ProductActions.createProductSuccess, (state, action) => {
+  on(CursoActions.createCursoSuccess, (state, action) => {
     return {
       ...state,
       isLoading: false,
-      products: [...state.products, action.data],
+      products: [...state.cursos, action.data],
     };
   }),
-  on(ProductActions.createProductFailure, (state, action) => {
+  on(CursoActions.createCursoFailure, (state, action) => {
     return {
       ...state,
       isLoading: false,
@@ -69,8 +69,8 @@ export const reducer = createReducer(
 
 );
 
-export const productFeature = createFeature({
-  name: productFeatureKey,
+export const cursoFeature = createFeature({
+  name: cursoFeatureKey,
   reducer,
 });
 

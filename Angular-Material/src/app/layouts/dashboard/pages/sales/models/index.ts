@@ -1,5 +1,5 @@
 import { FormControl } from "@angular/forms";
-import { IClases } from "../../products/models";
+import { IClases } from "../../cursos/models";
 import { IUser } from "../../users/models";
 
 export interface ISale {
