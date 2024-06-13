@@ -69,4 +69,4 @@ export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER')
     }
   ]
 })
-export class ProductsModule { }
+export class CursosModule { }

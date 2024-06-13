@@ -21,10 +21,10 @@ const routes: Routes = [
    },
    {
     path: 'cursos',
-    loadChildren: () =>import('./pages/cursos/cursos.module').then((m) => m.ProductsModule)
+    loadChildren: () =>import('./pages/cursos/cursos.module').then((m) => m.CursosModule)
    },
    {
-    path: 'sales',
+    path: 'inscripciones',
     canDeactivate: [unsavedChangesGuard],
     loadChildren: () =>import('./pages/sales/sales.module').then((m) => m.SalesModule)
 

@@ -3,8 +3,8 @@
     <mat-nav-list>
       <a routerLink="home" mat-list-item>Inicio</a>
       <a *ngIf="(authUser$ | async)?.role === 'ADMIN'" routerLink="users" mat-list-item>Alumnos</a>
-      <a routerLink="products" mat-list-item>Clases</a>
-      <a routerLink="sales" mat-list-item>Cursos</a>
+      <a routerLink="cursos" mat-list-item>Clases</a>
+      <a routerLink="inscripciones" mat-list-item>Cursos</a>
       <a (click)="logout()" mat-list-item>cerrar sesion</a>
     </mat-nav-list>
   </mat-drawer>

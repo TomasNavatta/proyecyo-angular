@@ -10,8 +10,7 @@ import {MatListModule} from '@angular/material/list';
  import {MatButtonModule} from '@angular/material/button';
 import { UsersModule } from './pages/users/users.module';
 import { PipesYDirectivasModule } from './pages/pipes-y-directivas/pipes-y-directivas.module';
-import { ProductsModule } from './pages/products/products.module';
-import { Clase10Rxjs2Module } from './pages/clase-10-rxjs-2/clase-10-rxjs-2.module';
+import { CursosModule } from './pages/cursos/cursos.module'; 
 
 
 
@@ -31,8 +30,8 @@ import { Clase10Rxjs2Module } from './pages/clase-10-rxjs-2/clase-10-rxjs-2.modu
     MatListModule,
     UsersModule,
     PipesYDirectivasModule,
-    ProductsModule,
-    Clase10Rxjs2Module
+    CursosModule,
+    
   
    
     
