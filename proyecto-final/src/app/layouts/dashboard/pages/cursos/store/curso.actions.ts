@@ -10,7 +10,7 @@ export const CursoActions = createActionGroup({
     'Create Curso': props<{ payload: ICreateClassPayload}>(),
     'Create Curso Success': props<{ data: IClases}>(),
     'Create Curso Failure': props<{ error: unknown}>(),
-    'Delete Curso By Id': props<{ id: number}>(),
+    'Delete Curso By Id': props<{ id: string}>(),
     'Delete Curso By Id Success': props<{ data: IClases}>(),
     'Delete Curso By Id Failure ': props<{ error: unknown}>(),
 

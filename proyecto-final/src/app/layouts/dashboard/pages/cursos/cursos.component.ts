@@ -33,7 +33,7 @@ export class CursosComponent implements OnInit {
     this.store.dispatch(CursoActions.loadCursos());
   }
 
-  deleteCursoById(id: number): void {
+  deleteCursoById(id: string): void {
     this.store.dispatch(CursoActions.deleteCursoById({id}))
   }
 

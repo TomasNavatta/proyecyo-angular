@@ -7,12 +7,12 @@ export interface IInscripciones {
     curso?: IClases;
     user?: IUser;
     userId: number
-    productId: string
-    quantity: number;
+    cursoId: string
+   
 }
 
 export interface IInscripcionesForm {
-    quantity: FormControl<number | null>;
+   
     user: FormControl<IUser | null>;
     curso: FormControl<IClases | null>;
 
@@ -21,6 +21,6 @@ export interface IInscripcionesForm {
 export interface ICreateInscripcionData {
     curso?: IClases | null;
     user?: IUser | null;
-    quantity?: number | null;
+  
 
 }

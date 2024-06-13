@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { InscricionesService } from './inscripciones.service';
+import { InscricpionesService } from './inscripciones.service';
 import { IInscripciones, IInscripcionesForm } from './models';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CursosService } from '../cursos/cursos.service';
@@ -26,7 +26,6 @@ export class InscripcionesComponent implements OnInit {
   existUnsavedChanges = false
 
   inscripcionForm = new FormGroup<IInscripcionesForm>({
-    quantity: new FormControl(1),
     user: new FormControl(null),
     curso: new FormControl(null)
 
@@ -44,7 +43,7 @@ export class InscripcionesComponent implements OnInit {
 
   
   constructor(
-    private inscripcionesService: InscricionesService,
+    private inscripcionesService: InscricpionesService,
     private CursosService: CursosService, 
     private usersService: UsersService,
     private store: Store) {

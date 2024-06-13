@@ -8,7 +8,7 @@ import { environment } from "../../../../../environments/environment";
 
 
 @Injectable({providedIn: 'root'})
-export class InscricionesService {
+export class InscricpionesService {
     constructor(private http: HttpClient) {}
     getInscripciones(): Observable<IInscripciones[]> {
       
@@ -17,8 +17,8 @@ export class InscricionesService {
     }
 
     getInscripcionesByUserId(uid: string): Observable<IInscripciones[]> {
-        return this.http.get<IInscripciones[]>(`${environment.baseAPIURL}/inscripciones?userId=${uid}`)
-        //return this.http.get<ISale[]>(`${environment.baseAPIURL}/sales?userId=${uid}$_embed=product`)
+        //return this.http.get<IInscripciones[]>(`${environment.baseAPIURL}/inscripciones?userId=${uid}`)
+        return this.http.get<IInscripciones[]>(`${environment.baseAPIURL}/inscripciones?userId=${uid}$_embed=curso`)
     }
 
     createInscripciones(data: ICreateInscripcionData) {

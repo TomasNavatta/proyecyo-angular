@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { InscripcionActions } from './inscripcion.actions';
-import { InscricionesService } from '../inscripciones.service';
+import { InscricpionesService } from '../inscripciones.service';
 
 
 @Injectable()
@@ -26,5 +26,5 @@ export class InscripcionEffects {
   });
 
 
-  constructor(private actions$: Actions, private inscripcionesService: InscricionesService) {}
+  constructor(private actions$: Actions, private inscripcionesService: InscricpionesService) {}
 }

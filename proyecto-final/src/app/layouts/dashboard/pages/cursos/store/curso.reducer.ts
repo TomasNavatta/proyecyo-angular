@@ -56,7 +56,7 @@ export const reducer = createReducer(
     return {
       ...state,
       isLoading: false,
-      products: [...state.cursos, action.data],
+      cursos: [...state.cursos, action.data],
     };
   }),
   on(CursoActions.createCursoFailure, (state, action) => {
@@ -65,6 +65,27 @@ export const reducer = createReducer(
       isLoading: false,
       error: action.error,
     };
+  }),
+
+  on(CursoActions.deleteCursoById, (state) => {
+    return {
+      ...state,
+      isLoading: true
+    }
+  }),
+  on(CursoActions.deleteCursoByIdSuccess, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      cursos: [...state.cursos.filter((el) => el.id != action.data.id)]
+    }
+  }),
+  on(CursoActions.deleteCursoByIdFailure, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      error: action.error
+    }
   }),
 
 );

@@ -1,5 +1,5 @@
 export interface IClases {
-    id: number;
+    id: string;
     clase: string;
     horario: string;
 

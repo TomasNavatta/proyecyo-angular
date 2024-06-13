@@ -19,7 +19,7 @@ export class CursosService {
     return this.httpClient.post<IClases>(environment.baseAPIURL + '/cursos', payload )
   }
 
-  deleteCursoById(id: number): Observable<IClases> {
+  deleteCursoById(id: string): Observable<IClases> {
     return this.httpClient.delete<IClases>(environment.baseAPIURL + '/cursos' + id )
   }
 }
