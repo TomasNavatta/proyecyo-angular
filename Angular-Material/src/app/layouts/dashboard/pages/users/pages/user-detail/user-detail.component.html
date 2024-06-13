@@ -1,0 +1,7 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div [ngClass]="!loading ? 'd-block' : 'd-none'">
+<h2>detalles del usuario</h2>
+<pre>{{user$ | async | json}}</pre>
+<h2>compras del usuario:</h2>
+<pre>{{  compras$ | async | json}}</pre>
+</div>

@@ -1,0 +1,46 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer [opened]="isMobile() ? 'false' : 'true'" #drawer class="example-sidenav" [mode]="isMobile() ? 'over' : 'side'">
+    <mat-nav-list>
+      <a routerLink="home" mat-list-item>Inicio</a>
+      <a *ngIf="(authUser$ | async)?.role === 'ADMIN'" routerLink="users" mat-list-item>Alumnos</a>
+      <a routerLink="products" mat-list-item>Clases</a>
+      <a routerLink="sales" mat-list-item>Cursos</a>
+      <a (click)="logout()" mat-list-item>cerrar sesion</a>
+    </mat-nav-list>
+  </mat-drawer>
+  
+    <div class="example-sidenav-content">
+        <mat-toolbar color="accent">
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <div>
+              <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+              </button>
+            <span>Administrador de Alumnos</span>
+            </div>
+            @if (authUser$ | async; as user){
+              <div>{{user?.firstName}}</div>
+            }
+          </div>
+          </mat-toolbar>
+
+        <main style="padding: 1rem;">
+          <!-- <div>
+            <button (click)="login()" color="primary" mat-flat-button>Iniciar sesion</button>
+            <button  (click)="logout()" color="warn" mat-flat-button>Cerrar sesion</button></div>
+              <app-users />  
+            <app-pipes-y-directivas/>  
+             <app-products/>  
+            <app-clase-09-rxjs/> 
+           <button (click)="mostartComponent = !mostartComponent">
+            alternar componente
+           </button>
+           <app-clase-10-rxjs-2 *ngIf="mostartComponent"/> -->
+
+           <router-outlet />
+
+        </main>  
+    
+    </div>
+  
+  </mat-drawer-container>
