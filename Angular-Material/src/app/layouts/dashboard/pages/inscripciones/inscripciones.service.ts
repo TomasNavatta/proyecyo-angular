@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, delay, of } from "rxjs";
-import { ICreateSaleData, ISale } from "./models";
+import { ICreateInscripcionData, IInscripciones } from "./models";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../../environments/environment";
 
@@ -8,21 +8,21 @@ import { environment } from "../../../../../environments/environment";
 
 
 @Injectable({providedIn: 'root'})
-export class SalesService {
+export class InscricionesService {
     constructor(private http: HttpClient) {}
-    getSales(): Observable<ISale[]> {
+    getInscripciones(): Observable<IInscripciones[]> {
       
-       return this.http.get<ISale[]>(environment.baseAPIURL + '/sales')
+       return this.http.get<IInscripciones[]>(environment.baseAPIURL + '/inscripciones')
       // return this.http.get<ISale[]>(`${environment.baseAPIURL}/sales?_embed=user&_embed=product`)
     }
 
-    getSalesByUserId(uid: string): Observable<ISale[]> {
-        return this.http.get<ISale[]>(`${environment.baseAPIURL}/sales?userId=${uid}`)
+    getInscripcionesByUserId(uid: string): Observable<IInscripciones[]> {
+        return this.http.get<IInscripciones[]>(`${environment.baseAPIURL}/inscripciones?userId=${uid}`)
         //return this.http.get<ISale[]>(`${environment.baseAPIURL}/sales?userId=${uid}$_embed=product`)
     }
 
-    createSales(data: ICreateSaleData) {
-        return this.http.post<ISale>(`${environment.baseAPIURL}/sales`, data)
+    createInscripciones(data: ICreateInscripcionData) {
+        return this.http.post<IInscripciones>(`${environment.baseAPIURL}/inscripciones`, data)
 
         
     }
@@ -30,12 +30,12 @@ export class SalesService {
 
 
 
-    deleteSale(id: number) {
+    deleteInscripcion(id: number) {
         return of([])
     }
 
 
-    upsateSale(id: number, data: ISale) {
+    upsateInscripcion(id: number, data: IInscripciones) {
      //   return of (SALES_DB.map((sale)=> sale.id === id ? {...sale, ...data} : sale))
     }
 }

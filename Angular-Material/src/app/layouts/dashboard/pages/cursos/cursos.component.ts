@@ -62,7 +62,7 @@ export class CursosComponent implements OnInit {
 
             result.createdAt = new Date()
 
-            this.cursosService.createProduct(result).subscribe({
+            this.cursosService.createCurso(result).subscribe({
               next: (usuarioCreado) => {
                 this.clases = [...this.clases, usuarioCreado]
               }

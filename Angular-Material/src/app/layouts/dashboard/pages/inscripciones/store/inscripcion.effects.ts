@@ -2,29 +2,29 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
-import { SaleActions } from './sale.actions';
-import { SalesService } from '../sales.service';
+import { InscripcionActions } from './inscripcion.actions';
+import { InscricionesService } from '../inscripciones.service';
 
 
 @Injectable()
-export class SaleEffects {
+export class InscripcionEffects {
 
-  loadSales$ = createEffect(() => {
+  loadinscripciones$ = createEffect(() => {
     return this.actions$.pipe(
       // ofType lo que hace es filtar todas las acciones que se disparan 
       //en mi aplicacion, y toma las acciones que indicamos
-      ofType(SaleActions.loadSales),
+      ofType(InscripcionActions.loadInscripciones),
       concatMap(() =>
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        this.salesService.getSales().pipe(
+        this.inscripcionesService.getInscripciones().pipe(
           // si tdo sale bien:
-          map(data => SaleActions.loadSalesSuccess({ data })),
+          map(data => InscripcionActions.loadInscripcionesSuccess({ data })),
           //si hay un error:
-          catchError(error => of(SaleActions.loadSalesFailure({ error }))))
+          catchError(error => of(InscripcionActions.loadInscripcionesFailure({ error }))))
       )
     );
   });
 
 
-  constructor(private actions$: Actions, private salesService: SalesService) {}
+  constructor(private actions$: Actions, private inscripcionesService: InscricionesService) {}
 }

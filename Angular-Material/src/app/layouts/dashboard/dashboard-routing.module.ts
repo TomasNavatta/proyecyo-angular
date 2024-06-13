@@ -26,7 +26,7 @@ const routes: Routes = [
    {
     path: 'inscripciones',
     canDeactivate: [unsavedChangesGuard],
-    loadChildren: () =>import('./pages/sales/sales.module').then((m) => m.SalesModule)
+    loadChildren: () =>import('./pages/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule)
 
    }
     

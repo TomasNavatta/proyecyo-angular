@@ -9,17 +9,17 @@ export class CursosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProducts(): Observable<IClases[]> {
+  getCursos(): Observable<IClases[]> {
     return this.httpClient.get<IClases[]>(
-      environment.baseAPIURL + '/products'
+      environment.baseAPIURL + '/cursos'
     );
   }
 
-  createProduct(payload: ICreateClassPayload): Observable<IClases> {
-    return this.httpClient.post<IClases>(environment.baseAPIURL + '/products', payload )
+  createCurso(payload: ICreateClassPayload): Observable<IClases> {
+    return this.httpClient.post<IClases>(environment.baseAPIURL + '/cursos', payload )
   }
 
-  deleteProductById(id: number): Observable<IClases> {
-    return this.httpClient.delete<IClases>(environment.baseAPIURL + '/products' + id )
+  deleteCursoById(id: number): Observable<IClases> {
+    return this.httpClient.delete<IClases>(environment.baseAPIURL + '/cursos' + id )
   }
 }

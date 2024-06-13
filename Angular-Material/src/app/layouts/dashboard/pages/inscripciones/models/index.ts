@@ -2,7 +2,7 @@ import { FormControl } from "@angular/forms";
 import { IClases } from "../../cursos/models";
 import { IUser } from "../../users/models";
 
-export interface ISale {
+export interface IInscripciones {
     id: number;
     curso?: IClases;
     user?: IUser;
@@ -11,14 +11,14 @@ export interface ISale {
     quantity: number;
 }
 
-export interface ISaleForm {
+export interface IInscripcionesForm {
     quantity: FormControl<number | null>;
     user: FormControl<IUser | null>;
     curso: FormControl<IClases | null>;
 
 }
 
-export interface ICreateSaleData {
+export interface ICreateInscripcionData {
     curso?: IClases | null;
     user?: IUser | null;
     quantity?: number | null;

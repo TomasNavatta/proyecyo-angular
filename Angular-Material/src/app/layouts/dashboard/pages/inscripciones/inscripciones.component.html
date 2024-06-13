@@ -1,4 +1,4 @@
-@if(loadingSales$ | async) {
+@if(loadingInscriciones$ | async) {
     <mat-spinner></mat-spinner>
 } @else{
 
@@ -7,7 +7,7 @@
 
     } @else {
 
-        <form [formGroup]="saleForm" action="">
+        <form [formGroup]="inscripcionForm" action="">
             <mat-form-field>
                 <mat-label>curso</mat-label>
                 <mat-select formControlName="curso">
@@ -21,7 +21,7 @@
             </mat-form-field>
             -->
             <mat-form-field>
-                <mat-label>Comprador</mat-label>
+                <mat-label>Alumno</mat-label>
                 <mat-select formControlName="user">
                   <mat-option [value]="user" *ngFor="let user of users"
                     >{{ user.firstName }} {{ user.lastName }}</mat-option>
@@ -29,14 +29,14 @@
     
             </mat-form-field>
     
-            <button (click)="createSale()" mat-button>crear</button>
+            <button (click)="createInscripciones()" mat-button>crear</button>
     
         </form>
     
        
 
 
-        <table mat-table [dataSource]="(sales$ | async) || []"  class="mat-elevation-z8">
+        <table mat-table [dataSource]="(inscripciones$ | async) || []"  class="mat-elevation-z8">
               <!-- Position Column -->
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>No.</th>

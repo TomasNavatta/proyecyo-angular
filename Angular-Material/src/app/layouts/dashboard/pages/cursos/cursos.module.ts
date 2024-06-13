@@ -63,7 +63,7 @@ export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER')
     {
       provide: PRODUCTS,
       useFactory: (cursosService: CursosService) => {
-        return  cursosService.getProducts()
+        return  cursosService.getCursos()
       },
       deps:[CursosService]
     }

@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../users.service';
 import { Observable, finalize } from 'rxjs';
 import { IUser } from '../../models';
-import { SalesService } from '../../../sales/sales.service';
-import { ISale } from '../../../sales/models';
+import { InscricionesService } from '../../../inscripciones/inscripciones.service';
+import { IInscripciones } from '../../../inscripciones/models'; 
 
 @Component({
   selector: 'app-user-detail',
@@ -17,15 +17,15 @@ export class UserDetailComponent {
 
   loading = false
 
-  compras$: Observable<ISale[]>
+  compras$: Observable<IInscripciones[]>
   constructor(private activatedRoute: ActivatedRoute,
      private router: Router, 
      private usersService: UsersService,
-     private salesService: SalesService
+     private inscripcionesService: InscricionesService
 
   ) {
     this.loading = true
-    this.compras$ = this.salesService.getSalesByUserId(this.activatedRoute.snapshot.params['id'])
+    this.compras$ = this.inscripcionesService.getInscripcionesByUserId(this.activatedRoute.snapshot.params['id'])
 
 
     this.user$ = this.usersService.getUserById(this.activatedRoute.snapshot.params['id'])

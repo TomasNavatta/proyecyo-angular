@@ -9,12 +9,12 @@ import { CursosService } from '../cursos.service';
 @Injectable()
 export class CursoEffects {
 
-  loadProducts$ = createEffect(() => {
+  loadCursos$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CursoActions.loadCursos),
       concatMap(() =>
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        this.cursosService.getProducts().pipe(
+        this.cursosService.getCursos().pipe(
           // El servicio responde OK:
           map((data) => CursoActions.loadCursosSuccess({ data })),
 
@@ -27,12 +27,12 @@ export class CursoEffects {
     );
   });
 
-  createProduct$ = createEffect(() => {
+  createCurso$ = createEffect(() => {
     return this.actions$.pipe(
       // Filtramos la accion:
       ofType(CursoActions.createCurso),
       concatMap((action) =>
-        this.cursosService.createProduct(action.payload).pipe(
+        this.cursosService.createCurso(action.payload).pipe(
           // El servicio responde OK:
           map((data) => CursoActions.createCursoSuccess({ data })),
           // El servicio responde FAIL:
@@ -44,12 +44,12 @@ export class CursoEffects {
     );
   });
 
-  deleteProductById$ = createEffect(() => {
+  deleteCursoById$ = createEffect(() => {
     return this.actions$.pipe(
       // Filtramos la accion:
       ofType(CursoActions.deleteCursoById),
       concatMap((action) =>
-        this.cursosService.deleteProductById(action.id).pipe(
+        this.cursosService.deleteCursoById(action.id).pipe(
           // El servicio responde OK:
           map((data) => CursoActions.deleteCursoByIdSuccess({ data })),
           // El servicio responde FAIL:
