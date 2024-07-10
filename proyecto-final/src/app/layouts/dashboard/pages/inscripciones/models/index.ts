@@ -6,7 +6,7 @@ export interface IInscripciones {
     id: number;
     curso?: IClases;
     user?: IUser;
-    userId: number
+    userId: string
     cursoId: string
    
 }

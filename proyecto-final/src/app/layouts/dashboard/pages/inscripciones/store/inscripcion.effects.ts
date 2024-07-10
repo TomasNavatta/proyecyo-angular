@@ -24,6 +24,55 @@ export class InscripcionEffects {
       )
     );
   });
+  
+
+  createInscripcion$ = createEffect(() => {
+    return this.actions$.pipe(
+      // Filtramos la accion:
+      ofType(InscripcionActions.createInscripcion),
+      concatMap((action) =>
+        this.inscripcionesService.createInscripciones(action.data).pipe(
+          // El servicio responde OK:
+          map((data) => InscripcionActions.createInscripcionSuccess({ data })),
+          // El servicio responde FAIL:
+          catchError((error) =>
+            of(InscripcionActions.createInscripcionFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  deleteInscripcionById$ = createEffect(() => {
+    return this.actions$.pipe(
+      // Filtramos la accion:
+      ofType(InscripcionActions.deleteInscripcionById),
+      concatMap((action) =>
+        this.inscripcionesService.deleteInscripcionById(action.id).pipe(
+          // El servicio responde OK:
+          map((data) => InscripcionActions.deleteInscripcionByIdSuccess({ data })),
+          // El servicio responde FAIL:
+          catchError((error) =>
+            of(InscripcionActions.deleteInscripcionByIdFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  updateInscripcion$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(InscripcionActions.updateInscripcion),
+      concatMap((action) =>
+        this.inscripcionesService.updateInscripcion(action.payload).pipe(
+          map((data) => InscripcionActions.updateInscripcionSuccess({ data })),
+          catchError((error) =>
+            of(InscripcionActions.updateInscripcionFailure({ error }))
+          )
+        )
+      )
+    );
+  });
 
 
   constructor(private actions$: Actions, private inscripcionesService: InscricpionesService) {}

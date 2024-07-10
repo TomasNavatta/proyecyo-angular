@@ -13,6 +13,9 @@ export const CursoActions = createActionGroup({
     'Delete Curso By Id': props<{ id: string}>(),
     'Delete Curso By Id Success': props<{ data: IClases}>(),
     'Delete Curso By Id Failure ': props<{ error: unknown}>(),
+    'Update Curso': props<{ payload: IClases }>(),
+    'Update Curso Success': props<{ data: IClases }>(),
+    'Update Curso Failure': props<{ error: unknown }>(),
 
   }
 });

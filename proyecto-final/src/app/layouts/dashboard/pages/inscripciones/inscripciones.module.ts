@@ -10,11 +10,13 @@ import { InscripcionEffects } from './store/inscripcion.effects';
 import {MatIconModule} from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
 import { InscripcionFeature } from './store/inscripcion.reducer';
+import { InscripcionDialogComponent } from './components/inscripcion-dialog/inscripcion-dialog.component';
 
 
 @NgModule({
   declarations: [
-    InscripcionesComponent
+    InscripcionesComponent,
+    InscripcionDialogComponent
   ],
   imports: [
     CommonModule,

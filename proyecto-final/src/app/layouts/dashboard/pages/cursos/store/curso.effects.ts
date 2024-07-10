@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { CursoActions } from './curso.actions';
 import { CursosService } from '../cursos.service';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable()
@@ -60,6 +62,42 @@ export class CursoEffects {
       )
     );
   });
+
+  updateCurso$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CursoActions.updateCurso),
+      concatMap((action) =>
+        this.cursosService.updateCurso(action.payload).pipe(
+          map((data) => CursoActions.updateCursoSuccess({ data })),
+          catchError((error) =>
+            of(CursoActions.updateCursoFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+  
+  
+
+  onErrros$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(
+        CursoActions.loadCursosFailure,
+        CursoActions.createCursoFailure,
+        CursoActions.deleteCursoByIdFailure),
+        tap((action) => {
+
+          if(action.error instanceof HttpErrorResponse) {
+
+            Swal.fire({
+              icon: 'error',
+              text: action.error['message']
+  
+            })
+          }
+        })
+    )
+  }, {dispatch: false})
 
 
 

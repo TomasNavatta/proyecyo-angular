@@ -88,6 +88,29 @@ export const reducer = createReducer(
     }
   }),
 
+  on(CursoActions.updateCurso, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(CursoActions.updateCursoSuccess, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      cursos: [...state.cursos.map((curso) => curso.id === action.data.id ? action.data : curso)],
+    };
+  }),
+  on(CursoActions.updateCursoFailure, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      error: action.error,
+    };
+  }),
+  
+  
+
 );
 
 export const cursoFeature = createFeature({

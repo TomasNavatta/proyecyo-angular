@@ -11,8 +11,9 @@ import { IUser } from '../../models';
 export class UserDialogComponent {
   userForm: FormGroup
 
-  constructor( private formBuilder: FormBuilder,
-     private matDialogRef: MatDialogRef<UserDialogComponent>, 
+  constructor( 
+    private formBuilder: FormBuilder,
+    private matDialogRef: MatDialogRef<UserDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) private  editingUser?: IUser  ) {
     this.userForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$'), Validators.maxLength(5)]],

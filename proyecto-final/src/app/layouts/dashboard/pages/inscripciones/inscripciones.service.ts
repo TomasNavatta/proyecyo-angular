@@ -12,7 +12,7 @@ export class InscricpionesService {
     constructor(private http: HttpClient) {}
     getInscripciones(): Observable<IInscripciones[]> {
       
-       return this.http.get<IInscripciones[]>(environment.baseAPIURL + '/inscripciones')
+       return this.http.get<IInscripciones[]>(`${environment.baseAPIURL}/inscripciones?_embed=user&_embed=curso`)
       // return this.http.get<ISale[]>(`${environment.baseAPIURL}/sales?_embed=user&_embed=product`)
     }
 
@@ -27,15 +27,16 @@ export class InscricpionesService {
         
     }
 
+    
+
+    deleteInscripcionById(id: string): Observable<IInscripciones> {
+        return this.http.delete<IInscripciones>(environment.baseAPIURL + '/inscripciones/' + id )
+      }
+    
 
 
-
-    deleteInscripcion(id: number) {
-        return of([])
-    }
-
-
-    upsateInscripcion(id: number, data: IInscripciones) {
-     //   return of (SALES_DB.map((sale)=> sale.id === id ? {...sale, ...data} : sale))
-    }
+      updateInscripcion(payload: IInscripciones): Observable<IInscripciones> {
+        return this.http.put<IInscripciones>(`${environment.baseAPIURL}/inscripciones/${payload.id}`, payload);
+      }
+      
 }

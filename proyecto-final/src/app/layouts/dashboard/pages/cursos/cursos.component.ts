@@ -37,14 +37,7 @@ export class CursosComponent implements OnInit {
     this.store.dispatch(CursoActions.deleteCursoById({id}))
   }
 
-  createCurso(): void {
-    this.store.dispatch(CursoActions.createCurso({ payload: {
-      clase: 'Random product',
-      horario: '10:00'
-    }}))
-
-  }
-
+ 
 
   openDialog(editingClase?: IClases): void {
     this.matDialog.open(ClaseDialogComponent, {
@@ -54,29 +47,20 @@ export class CursosComponent implements OnInit {
     .subscribe({
       next: (result) => {
         if (result) {
-          if(editingClase) {
-            //actualizar el usuario en el array
-            this.clases = this.clases.map((u) => u.id === editingClase.id ? {...u, ...result} : u)
-          } else{
-                      //logica de crear el usuario
-
-            result.createdAt = new Date()
-
-            this.cursosService.createCurso(result).subscribe({
-              next: (usuarioCreado) => {
-                this.clases = [...this.clases, usuarioCreado]
-              }
-            })
-
-
+          if (editingClase) {
+            // Update the course
+            this.store.dispatch(CursoActions.updateCurso({ payload: { ...editingClase, ...result } }));
+          } else {
+            // Create a new course
+            this.store.dispatch(CursoActions.createCurso({ payload: result }));
           }
-
         }
-      
-
       },
-    })
+    });
   }
+  
+  
+  
  
 
 }

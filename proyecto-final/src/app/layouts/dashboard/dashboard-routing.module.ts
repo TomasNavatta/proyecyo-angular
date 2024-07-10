@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { adminGuard } from '../../core/guards/admin.guard';
 import { unsavedChangesGuard } from '../../core/guards/unsaved-changes.guard';
 
+
 const routes: Routes = [
     
   {
     path: 'home',
+    data: {
+      title: 'Inicio'
+    },
     loadChildren: () =>import('./pages/home/home.module').then((m) => m.HomeModule)
   },
    {

@@ -10,6 +10,8 @@ import { InscripcionActions } from './store/inscripcion.actions';
 import { Observable, Subscription, first } from 'rxjs';
 import { IUser } from '../users/models';
 import { UsersService } from '../users/users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { InscripcionDialogComponent } from './components/inscripcion-dialog/inscripcion-dialog.component';
 
 @Component({
   selector: 'app-inscripciones',
@@ -19,7 +21,7 @@ import { UsersService } from '../users/users.service';
 export class InscripcionesComponent implements OnInit {
 
 
-  clases: IClases [] = []
+  clases: IClases[] = []
   users: IUser[] = [];
 
 
@@ -46,7 +48,8 @@ export class InscripcionesComponent implements OnInit {
     private inscripcionesService: InscricpionesService,
     private CursosService: CursosService, 
     private usersService: UsersService,
-    private store: Store) {
+    private store: Store,
+    private matDialog: MatDialog) {
       this.loadingInscriciones$ = this.store.select(selectLoadingInscripciones)
       this.inscripciones$ = this.store.select(selectInscripcionList)
       this.error$ = this.store.select(selectInscripcionesError)
@@ -54,7 +57,7 @@ export class InscripcionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.loadInscrpciones()
+   this.loadInscripciones()
    this.loadCursos()
    this.loadUsers()
    this.suscribeToInscripcionFormChanges()
@@ -73,28 +76,69 @@ export class InscripcionesComponent implements OnInit {
 
   createInscripciones() {
     this.inscripcionesService.createInscripciones(this.inscripcionForm.value).subscribe({
-      next: (sales) => {},
+      next: (inscripciones) => {
+        console.log(inscripciones)
+      },
       error: () => {},
       complete: () => {}
     })
   }
 
+  
+  deleteInscripcionById(id: string): void {
+    this.store.dispatch(InscripcionActions.deleteInscripcionById({id}))
+  }
+
+
+  openDialog(editingClase?: IInscripciones): void {
+    this.matDialog.open(InscripcionDialogComponent, {
+      data: editingClase,
+    })
+    .afterClosed()
+    .subscribe({
+      next: (result) => {
+        if (result) {
+          if (editingClase) {
+            // Update the course
+            this.store.dispatch(InscripcionActions.updateInscripcion({ payload: { ...editingClase, ...result } }));
+          } else {
+            // Create a new course
+            this.store.dispatch(InscripcionActions.createInscripcion({ data: result }));
+          }
+        }
+      },
+    });
+  }
+
+
   loadUsers() {
     this.usersService.getUsers().subscribe({
       next: (users) => {
-        this.users = users
-      }
-    })
+        this.users = users;
+        console.log('Usuarios cargados:', this.users);
+      },
+      error: (err) => console.error('Error al cargar usuarios:', err)
+    });
   }
-
+  
   loadCursos() {
     this.CursosService.getCursos().subscribe({
-      next: (v) => (this.clases = v)
-    })
+      next: (cursos) => {
+        this.clases = cursos;
+        console.log('Cursos cargados:', this.clases);
+      },
+      error: (err) => console.error('Error al cargar cursos:', err)
+    });
   }
-
-  loadInscrpciones() {
-    this.store.dispatch(InscripcionActions.loadInscripciones())
-   }
+  
+  loadInscripciones() {
+    this.store.dispatch(InscripcionActions.loadInscripciones());
+    this.inscripciones$.pipe(first()).subscribe({
+      next: (inscripciones) => {
+        console.log('Inscripciones cargadas:', inscripciones);
+      },
+      error: (err) => console.error('Error al cargar inscripciones:', err)
+    });
+  }
 
 }

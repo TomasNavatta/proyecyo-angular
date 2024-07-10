@@ -18,7 +18,8 @@ export class UserDetailComponent {
   loading = false
 
   cursos$: Observable<IInscripciones[]>
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+     private activatedRoute: ActivatedRoute,
      private router: Router, 
      private usersService: UsersService,
      private inscripcionesService: InscricpionesService

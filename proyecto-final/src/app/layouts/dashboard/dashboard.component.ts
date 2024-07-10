@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Observable } from 'rxjs';
 import { IUser } from './pages/users/models';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +14,11 @@ export class DashboardComponent {
 
   mostartComponent = true
   authUser$: Observable<IUser | null>
+  
 
   
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router,) {
     this. authUser$ = this.authService.authUser$
 
   }
